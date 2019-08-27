@@ -1,5 +1,5 @@
 # bloco-de-notas
-bloco de notas com python e tkinter
+Bloco de notas com Python e Tkinter
 
  Requisitos
 ----------------
