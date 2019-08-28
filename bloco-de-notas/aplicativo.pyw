@@ -145,7 +145,9 @@ class Aplicativo:
         arquivo.close()
 
     def fecharJanela(self):
-        if not self.arquivoSalvo:
+        if self.janelaDeSalvar:
+            self.janelaDeSalvar.lift()
+        elif not self.arquivoSalvo:
             self.janelaDeSalvar = Toplevel()
             self.janelaDeSalvar.geometry('250x100+500+500')
             self.janelaDeSalvar.title(self.diretorio)
