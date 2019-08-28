@@ -11,16 +11,16 @@ class Aplicativo:
         self.diretorio = 'Arquivo novo'
         self.atual = master
 
-        self.barraDeMenu = Menu(self.atual)
+        self.barraDeMenu = Menu(master)
         self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
 
-        self.barraVertical = Scrollbar(self.atual, orient=VERTICAL)
-        self.barraHorizontal = Scrollbar(self.atual, orient=HORIZONTAL)
-        self.conteudo = Text(self.atual, height=0, width=0, wrap=NONE,
+        self.barraVertical = Scrollbar(master, orient=VERTICAL)
+        self.barraHorizontal = Scrollbar(master, orient=HORIZONTAL)
+        self.conteudo = Text(master, height=0, width=0, wrap=NONE,
                              xscrollcommand=self.barraHorizontal.set,
                              yscrollcommand=self.barraVertical.set)
 
-        self.barraInferior = Label(self.atual)
+        self.barraInferior = Label(master)
         self.status = Label(self.barraInferior, text=self.chaveAtual)
 
         self.janelaDeSalvar = None
