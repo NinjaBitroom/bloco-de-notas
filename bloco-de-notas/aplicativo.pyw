@@ -90,12 +90,13 @@ class Aplicativo:
                 try:
                     arquivo = open(self.diretorio, 'r', encoding=chaves[tentativa])
                     self.mensagem = arquivo.read()
-                    arquivo.close()
                 except UnicodeDecodeError:
                     pass
                 else:
                     self.chaveAtual = chaves[tentativa]
                     break
+                finally:
+                    arquivo.close()
             else:
                 arquivo = open(self.diretorio, 'br')
                 self.mensagem = arquivo.read()
