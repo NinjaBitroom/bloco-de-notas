@@ -12,7 +12,8 @@ class Aplicativo:
         self.atual = master
 
         self.barraDeMenu = Menu(master)
-        self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
+        self.menuDeArquivo = Menu(self.barraDeMenu)
+        self.menuDeCodigo = Menu(self.barraDeMenu)
 
         self.barraVertical = Scrollbar(master, orient=VERTICAL)
         self.barraHorizontal = Scrollbar(master, orient=HORIZONTAL)
@@ -46,6 +47,12 @@ class Aplicativo:
         self.menuDeArquivo.add_separator()
         self.menuDeArquivo.add_command(label='Fechar', command=self.fecharJanela)
         self.menuDeArquivo.add_command(label='Fechar tudo', command=exit)
+
+        self.barraDeMenu.add_cascade(label='Codificação', menu=self.menuDeCodigo)
+        self.menuDeCodigo.add_command(label='UTF-8', command=lambda: self.mudarCodificacao('UTF-8'))
+        self.menuDeCodigo.add_command(label='UTF-16', command=lambda: self.mudarCodificacao('UTF-16'))
+        self.menuDeCodigo.add_command(label='UTF-32', command=lambda: self.mudarCodificacao('UTF-32'))
+        self.menuDeCodigo.add_command(label='ASCII', command=lambda: self.mudarCodificacao('ASCII'))
         self.atual.config(menu=self.barraDeMenu)
 
     def criarConteudo(self):
@@ -143,6 +150,9 @@ class Aplicativo:
         arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
         self.mensagem = arquivo.read()
         arquivo.close()
+
+    def mudarCodificacao(self, norma):
+        self.chaveAtual = norma
 
     def fecharJanela(self):
         if self.janelaDeSalvar:
