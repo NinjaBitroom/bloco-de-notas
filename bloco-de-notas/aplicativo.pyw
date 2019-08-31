@@ -12,8 +12,8 @@ class Aplicativo:
         self.atual = master
 
         self.barraDeMenu = Menu(master)
-        self.menuDeArquivo = Menu(self.barraDeMenu)
-        self.menuDeCodigo = Menu(self.barraDeMenu)
+        self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
+        self.menuDeCodigo = Menu(self.barraDeMenu, tearoff=0)
 
         self.barraVertical = Scrollbar(master, orient=VERTICAL)
         self.barraHorizontal = Scrollbar(master, orient=HORIZONTAL)
@@ -206,7 +206,7 @@ class Aspecto:
         master.geometry('600x400')
         master.grid_columnconfigure(1, weight=1)
         master.grid_rowconfigure(1, weight=1)
-        if os.name == 'NT':
+        if os.name == 'nt':
             master.iconbitmap('arquivos/icone.ico')
 
 
