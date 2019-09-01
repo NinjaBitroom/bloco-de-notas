@@ -84,29 +84,21 @@ class Aplicativo:
         self.atual.after(10, self.verificarStatus)
 
     def tentarAbrir(self):
-        chaves = ['ASCII', 'UTF-8']
-        for tentativa in range(0, 3):
-            if tentativa < 2:
-                try:
-                    arquivo = open(self.diretorio, 'r', encoding=chaves[tentativa])
-                    self.mensagem = arquivo.read()
-                except UnicodeDecodeError:
-                    pass
-                else:
-                    self.chaveAtual = chaves[tentativa]
-                    break
-                finally:
-                    arquivo.close()
-            else:
-                arquivo = open(self.diretorio, 'br')
-                self.mensagem = arquivo.read()
-                chute = chardet.detect(self.mensagem)
-                arquivo.close()
-                arquivo = open(self.diretorio, 'r', encoding=chute['encoding'])
-                self.mensagem = arquivo.read()
-                arquivo.close()
-                self.chaveAtual = chute['encoding']
-        self.status['text'] = self.chaveAtual
+        try:
+            arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
+            self.mensagem = arquivo.read()
+        except (UnicodeDecodeError, UnicodeError):
+            arquivo = open(self.diretorio, 'br')
+            self.mensagem = arquivo.read()
+            chute = chardet.detect(self.mensagem)
+            arquivo.close()
+            arquivo = open(self.diretorio, 'r', encoding=chute['encoding'])
+            self.mensagem = arquivo.read()
+            arquivo.close()
+            self.chaveAtual = chute['encoding']
+        finally:
+            arquivo.close()
+            self.status['text'] = self.chaveAtual
 
     def novo(self):
         self.diretorio = 'Arquivo novo'
