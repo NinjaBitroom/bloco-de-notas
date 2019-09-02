@@ -1,7 +1,10 @@
 from tkinter import *
 from tkinter import filedialog
+
 import chardet
 import os
+
+from bloco.barra import Barra
 
 
 class Aplicativo:
@@ -38,22 +41,7 @@ class Aplicativo:
 
     # Widgets
     def criarBarraSuperior(self):
-        self.barraDeMenu.add_cascade(label='Arquivo', menu=self.menuDeArquivo)
-        self.menuDeArquivo.add_command(label='Novo', command=self.novo)
-        self.menuDeArquivo.add_command(label='Nova janela', command=novaJanela)
-        self.menuDeArquivo.add_command(label='Carregar...', command=self.carregar)
-        self.menuDeArquivo.add_command(label='Salvar', command=self.salvar)
-        self.menuDeArquivo.add_command(label='Salvar como...', command=self.salvarComo)
-        self.menuDeArquivo.add_separator()
-        self.menuDeArquivo.add_command(label='Fechar', command=self.fecharJanela)
-        self.menuDeArquivo.add_command(label='Fechar tudo', command=exit)
-
-        self.barraDeMenu.add_cascade(label='Codificação', menu=self.menuDeCodigo)
-        self.menuDeCodigo.add_command(label='UTF-8', command=lambda: self.mudarCodificacao('UTF-8'))
-        self.menuDeCodigo.add_command(label='UTF-16', command=lambda: self.mudarCodificacao('UTF-16'))
-        self.menuDeCodigo.add_command(label='UTF-32', command=lambda: self.mudarCodificacao('UTF-32'))
-        self.menuDeCodigo.add_command(label='ASCII', command=lambda: self.mudarCodificacao('ASCII'))
-        self.atual.config(menu=self.barraDeMenu)
+        pass
 
     def criarConteudo(self):
         self.barraHorizontal.grid(row=2, column=1, sticky=EW)
@@ -205,6 +193,7 @@ class Aspecto:
 def novaJanela():
     janela = Tk()
     Aplicativo(janela)
+    Barra(Aplicativo(janela))
     Aspecto(janela)
     janela.mainloop()
 
