@@ -5,6 +5,7 @@ import chardet
 import os
 
 from blocoanotavel.barrasuperior import BarraSuperior
+from blocoanotavel.conteudo import Conteudo
 
 
 class Aplicativo:
@@ -44,12 +45,7 @@ class Aplicativo:
         pass
 
     def criarConteudo(self):
-        self.barraHorizontal.grid(row=2, column=1, sticky=EW)
-        self.barraVertical.grid(row=1, column=2, sticky=NS)
-        self.conteudo.grid(row=1, column=1, sticky=NSEW)
-
-        self.barraHorizontal.config(command=self.conteudo.xview)
-        self.barraVertical.config(command=self.conteudo.yview)
+        pass
 
     def criarBarraInferior(self):
         self.barraInferior.grid(row=3, column=1, columnspan=2, sticky=EW)
@@ -92,6 +88,9 @@ class Aplicativo:
         self.diretorio = 'Arquivo novo'
         self.conteudo.delete(1.0, END)
         self.mensagem = self.conteudo.get(1.0, END)
+
+    def novaJanela(self):
+        novaJanela()
 
     def carregar(self):
         copia = self.diretorio
@@ -196,6 +195,7 @@ def novaJanela():
     janela = Tk()
     aplicativo = Aplicativo(janela)
     BarraSuperior(aplicativo)
+    Conteudo(aplicativo)
     Aspecto(janela)
     janela.mainloop()
 
