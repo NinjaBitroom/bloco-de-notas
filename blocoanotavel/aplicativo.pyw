@@ -4,7 +4,7 @@ from tkinter import filedialog
 import chardet
 import os
 
-from bloco.barra import Barra
+from blocoanotavel.barrasuperior import BarraSuperior
 
 
 class Aplicativo:
@@ -195,7 +195,7 @@ class Aspecto:
 def novaJanela():
     janela = Tk()
     Aplicativo(janela)
-    Barra(Aplicativo(janela))
+    BarraSuperior(Aplicativo(janela))
     Aspecto(janela)
     janela.mainloop()
 
