@@ -1,4 +1,4 @@
-class Barra:
+class BarraSuperior:
     def __init__(self, master):
         master.barraDeMenu.add_cascade(label='Arquivo', menu=master.menuDeArquivo)
         master.menuDeArquivo.add_command(label='Novo', command=master.novo)
