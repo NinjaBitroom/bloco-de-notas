@@ -177,6 +177,7 @@ class Aplicativo:
             self.janelaDeSalvar.transient(self.atual)
             self.janelaDeSalvar.focus_force()
             self.janelaDeSalvar.grab_set()
+            self.janelaDeSalvar.protocol('WM_DELETE_WINDOW', self.cancelar)
         else:
             self.atual.destroy()
 
@@ -191,6 +192,7 @@ class Aplicativo:
     
     def cancelar(self):
         self.janelaDeSalvar.destroy()
+        self.janelaDeSalvar = None
 
 
 class Aspecto:
