@@ -2,7 +2,7 @@ class BarraSuperior:
     def __init__(self, master):
         master.barraDeMenu.add_cascade(label='Arquivo', menu=master.menuDeArquivo)
         master.menuDeArquivo.add_command(label='Novo', command=master.novo)
-        master.menuDeArquivo.add_command(label='Nova janela')
+        master.menuDeArquivo.add_command(label='Nova janela', command=master.novaJanela)
         master.menuDeArquivo.add_command(label='Carregar...', command=master.carregar)
         master.menuDeArquivo.add_command(label='Salvar', command=master.salvar)
         master.menuDeArquivo.add_command(label='Salvar como...', command=master.salvarComo)
