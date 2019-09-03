@@ -6,6 +6,7 @@ import os
 
 from blocoanotavel.barrasuperior import BarraSuperior
 from blocoanotavel.conteudo import Conteudo
+from blocoanotavel.barrainferior import BarraInferior
 
 
 class Aplicativo:
@@ -48,9 +49,7 @@ class Aplicativo:
         pass
 
     def criarBarraInferior(self):
-        self.barraInferior.grid(row=3, column=1, columnspan=2, sticky=EW)
-
-        self.status.grid(row=1, column=1, sticky=W)
+        pass
 
     # Funções
     def verificarSalvamento(self):
@@ -196,6 +195,7 @@ def novaJanela():
     aplicativo = Aplicativo(janela)
     BarraSuperior(aplicativo)
     Conteudo(aplicativo)
+    BarraInferior(aplicativo)
     Aspecto(janela)
     janela.mainloop()
 
