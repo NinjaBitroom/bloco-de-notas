@@ -193,9 +193,11 @@ class Aspecto:
 def novaJanela():
     janela = Tk()
     aplicativo = Aplicativo(janela)
+
     BarraSuperior(aplicativo)
     Conteudo(aplicativo)
     BarraInferior(aplicativo)
+
     Aspecto(janela)
     janela.mainloop()
 
