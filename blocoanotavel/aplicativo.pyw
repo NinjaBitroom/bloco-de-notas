@@ -7,6 +7,7 @@ import os
 from blocoanotavel.barrasuperior import BarraSuperior
 from blocoanotavel.conteudo import Conteudo
 from blocoanotavel.barrainferior import BarraInferior
+from blocoanotavel.janelasalvar import JanelaSalvar
 
 
 class Aplicativo:
@@ -138,47 +139,9 @@ class Aplicativo:
             self.janelaDeSalvar.lift()
         elif not self.arquivoSalvo:
             self.janelaDeSalvar = Toplevel()
-            self.janelaDeSalvar.geometry('250x100+500+500')
-            self.janelaDeSalvar.title(self.diretorio)
-            self.janelaDeSalvar.grid_columnconfigure(0, weight=1)
-            self.janelaDeSalvar.grid_columnconfigure(1, weight=1)
-            self.janelaDeSalvar.grid_columnconfigure(2, weight=1)
-            self.janelaDeSalvar.grid_rowconfigure(0, weight=3)
-            self.janelaDeSalvar.grid_rowconfigure(1, weight=1)
-
-            pergunta = Label(self.janelaDeSalvar, text='Deseja salvar?')
-            pergunta.grid(column=0, row=0, columnspan=3, sticky=NSEW)
-            pergunta['font'] = ('Arial', 20)
-
-            botaoSalvar = Button(self.janelaDeSalvar, text='Salvar', width=6, command=self.sairSalvando)
-            botaoSalvar.grid(column=0, row=1, sticky=W)
-
-            botaoNaoSalvar = Button(self.janelaDeSalvar, text='Não salvar', width=6, command=self.sairSemSalvar)
-            botaoNaoSalvar.grid(column=1, row=1, sticky=EW)
-
-            botaoCancelar = Button(self.janelaDeSalvar, text='Cancelar', width=6, command=self.cancelar)
-            botaoCancelar.grid(column=2, row=1, sticky=E)
-
-            self.janelaDeSalvar.resizable(False, False)
-            self.janelaDeSalvar.transient(self.atual)
-            self.janelaDeSalvar.focus_force()
-            self.janelaDeSalvar.grab_set()
-            self.janelaDeSalvar.protocol('WM_DELETE_WINDOW', self.cancelar)
+            JanelaSalvar(self)
         else:
             self.atual.destroy()
-
-    def sairSalvando(self):
-        self.salvar()
-        self.janelaDeSalvar.destroy()
-        self.atual.destroy()
-    
-    def sairSemSalvar(self):
-        self.janelaDeSalvar.destroy()
-        self.atual.destroy()
-    
-    def cancelar(self):
-        self.janelaDeSalvar.destroy()
-        self.janelaDeSalvar = None
 
 
 class Aspecto:
