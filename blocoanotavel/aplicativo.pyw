@@ -65,10 +65,8 @@ class Aplicativo:
             arquivo = open(self.diretorio, 'br')
             self.mensagem = arquivo.read()
             chute = chardet.detect(self.mensagem)
-            arquivo.close()
             arquivo = open(self.diretorio, 'r', encoding=chute['encoding'])
             self.mensagem = arquivo.read()
-            arquivo.close()
             self.chaveAtual = chute['encoding']
         finally:
             arquivo.close()
@@ -116,7 +114,6 @@ class Aplicativo:
         arquivo = open(self.diretorio, 'w', encoding=self.chaveAtual)
         texto = self.conteudo.get(1.0, END)
         arquivo.write(texto)
-        arquivo.close()
         arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
         self.mensagem = arquivo.read()
         arquivo.close()
