@@ -43,17 +43,6 @@ class Aplicativo:
         master.after(0, self.verificarStatus)
         master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
 
-    # Widgets
-    def criarBarraSuperior(self):
-        pass
-
-    def criarConteudo(self):
-        pass
-
-    def criarBarraInferior(self):
-        pass
-
-    # Funções
     def verificarSalvamento(self):
         if self.mensagem == self.conteudo.get(0.0, END):
             self.atual.title(f'{self.diretorio}   -   Bloco de Notas')
