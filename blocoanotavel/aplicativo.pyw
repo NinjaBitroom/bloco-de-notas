@@ -33,9 +33,10 @@ class Aplicativo:
         self.janelaDeSalvar = None
         self.mensagem = self.conteudo.get(1.0, END)
 
-        self.criarBarraSuperior()
-        self.criarConteudo()
-        self.criarBarraInferior()
+        BarraSuperior(self)
+        Conteudo(self)
+        BarraInferior(self)
+
         self.novo()
 
         master.after(0, self.verificarSalvamento)
@@ -155,12 +156,7 @@ class Aspecto:
 
 def novaJanela():
     janela = Tk()
-    aplicativo = Aplicativo(janela)
-
-    BarraSuperior(aplicativo)
-    Conteudo(aplicativo)
-    BarraInferior(aplicativo)
-
+    Aplicativo(janela)
     Aspecto(janela)
     janela.mainloop()
 
