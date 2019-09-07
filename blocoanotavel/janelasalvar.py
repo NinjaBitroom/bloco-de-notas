@@ -16,14 +16,14 @@ class JanelaSalvar:
         pergunta.grid(column=0, row=0, columnspan=3, sticky=NSEW)
         pergunta['font'] = ('Arial', 20)
 
-        botaoSalvar = Button(master.janelaDeSalvar, text='Salvar', width=6, command=self.sairSalvando)
-        botaoSalvar.grid(column=0, row=1, sticky=W)
+        botaoSalvar = Button(master.janelaDeSalvar, text='Salvar', width=9, command=self.sairSalvando)
+        botaoSalvar.grid(column=0, row=1)
 
-        botaoNaoSalvar = Button(master.janelaDeSalvar, text='Não salvar', width=6, command=self.sairSemSalvar)
-        botaoNaoSalvar.grid(column=1, row=1, sticky=EW)
+        botaoNaoSalvar = Button(master.janelaDeSalvar, text='Não salvar', width=9, command=self.sairSemSalvar)
+        botaoNaoSalvar.grid(column=1, row=1)
 
-        botaoCancelar = Button(master.janelaDeSalvar, text='Cancelar', width=6, command=self.cancelar)
-        botaoCancelar.grid(column=2, row=1, sticky=E)
+        botaoCancelar = Button(master.janelaDeSalvar, text='Cancelar', width=9, command=self.cancelar)
+        botaoCancelar.grid(column=2, row=1)
 
         master.janelaDeSalvar.resizable(False, False)
         master.janelaDeSalvar.transient(master.atual)
