@@ -131,6 +131,8 @@ class Aspecto:
         master.grid_rowconfigure(1, weight=1)
         if os.name == 'nt':
             master.iconbitmap('arquivos/icone.ico')
+        else:
+            master.iconbitmap('@arquivos/icone.xbm')
 
 
 def novaJanela():
