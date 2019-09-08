@@ -40,7 +40,6 @@ class Aplicativo:
         self.novo()
 
         master.after(0, self.verificarSalvamento)
-        master.after(0, self.verificarStatus)
         master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
 
     def verificarSalvamento(self):
@@ -51,10 +50,6 @@ class Aplicativo:
             self.atual.title(f'{self.diretorio} * -   Bloco de Notas')
             self.arquivoSalvo = False
         self.atual.after(10, self.verificarSalvamento)
-
-    def verificarStatus(self):
-        self.status['text'] = self.chaveAtual
-        self.atual.after(10, self.verificarStatus)
 
     def tentarAbrir(self):
         try:
