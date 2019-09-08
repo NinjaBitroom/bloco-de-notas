@@ -1,4 +1,4 @@
-from tkinter import Label, NSEW, Button, W, EW, E
+from tkinter import Label, NSEW, Button
 
 
 class JanelaSalvar:
