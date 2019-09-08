@@ -114,6 +114,7 @@ class Aplicativo:
 
     def mudarCodificacao(self, norma):
         self.chaveAtual = norma
+        self.status['text'] = self.chaveAtual
 
     def fecharJanela(self):
         if self.janelaDeSalvar:
