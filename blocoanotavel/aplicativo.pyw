@@ -40,30 +40,7 @@ class Aplicativo:
         master.after(0, self.verificarSalvamento)
         master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
 
-    def verificarSalvamento(self):
-        if self.mensagem == self.conteudo.get(0.0, END):
-            self.atual.title(f'{self.diretorio}   -   Bloco de Notas')
-            self.arquivoSalvo = True
-        else:
-            self.atual.title(f'{self.diretorio} * -   Bloco de Notas')
-            self.arquivoSalvo = False
-        self.atual.after(10, self.verificarSalvamento)
-
-    def tentarAbrir(self):
-        try:
-            arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
-            self.mensagem = arquivo.read()
-        except (UnicodeDecodeError, UnicodeError):
-            arquivo = open(self.diretorio, 'br')
-            self.mensagem = arquivo.read()
-            chute = chardet.detect(self.mensagem)
-            arquivo = open(self.diretorio, 'r', encoding=chute['encoding'])
-            self.mensagem = arquivo.read()
-            self.chaveAtual = chute['encoding']
-        finally:
-            arquivo.close()
-            self.status['text'] = self.chaveAtual
-
+    # Funções da Barra Superior
     def novo(self):
         self.diretorio = 'Arquivo novo'
         self.conteudo.delete(1.0, END)
@@ -102,6 +79,26 @@ class Aplicativo:
         else:
             self.salvarArquivo()
 
+    def mudarCodificacao(self, norma):
+        self.chaveAtual = norma
+        self.status['text'] = self.chaveAtual
+
+    # Métodos de manipulação de arquivos
+    def tentarAbrir(self):
+        try:
+            arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
+            self.mensagem = arquivo.read()
+        except (UnicodeDecodeError, UnicodeError):
+            arquivo = open(self.diretorio, 'br')
+            self.mensagem = arquivo.read()
+            chute = chardet.detect(self.mensagem)
+            arquivo = open(self.diretorio, 'r', encoding=chute['encoding'])
+            self.mensagem = arquivo.read()
+            self.chaveAtual = chute['encoding']
+        finally:
+            arquivo.close()
+            self.status['text'] = self.chaveAtual
+
     def salvarArquivo(self):
         arquivo = open(self.diretorio, 'w', encoding=self.chaveAtual)
         texto = self.conteudo.get(1.0, END)
@@ -110,9 +107,15 @@ class Aplicativo:
         self.mensagem = arquivo.read()
         arquivo.close()
 
-    def mudarCodificacao(self, norma):
-        self.chaveAtual = norma
-        self.status['text'] = self.chaveAtual
+    # Funções que verificam o estado do texto do conteúdo
+    def verificarSalvamento(self):
+        if self.mensagem == self.conteudo.get(0.0, END):
+            self.atual.title(f'{self.diretorio}   -   Bloco de Notas')
+            self.arquivoSalvo = True
+        else:
+            self.atual.title(f'{self.diretorio} * -   Bloco de Notas')
+            self.arquivoSalvo = False
+        self.atual.after(10, self.verificarSalvamento)
 
     def fecharJanela(self):
         if self.janelaDeSalvar:
