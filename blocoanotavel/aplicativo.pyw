@@ -37,8 +37,6 @@ class Aplicativo:
         Conteudo(self)
         BarraInferior(self)
 
-        self.novo()
-
         master.after(0, self.verificarSalvamento)
         master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
 
