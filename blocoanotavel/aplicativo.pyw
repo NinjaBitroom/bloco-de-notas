@@ -54,7 +54,6 @@ class Aplicativo:
 
     def verificarStatus(self):
         self.status['text'] = self.chaveAtual
-        self.status.grid(row=1, column=2)
         self.atual.after(10, self.verificarStatus)
 
     def tentarAbrir(self):
