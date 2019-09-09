@@ -135,7 +135,8 @@ class Aspecto:
         if os.name == 'nt':
             master.iconbitmap('arquivos/icone.ico')
         else:
-            master.iconbitmap('@arquivos/icone.xbm')
+            img = PhotoImage(file='arquivos/icone.gif')
+            master.tk.call('wm', 'iconphoto', master._w, img)
 
 
 def novaJanela():
