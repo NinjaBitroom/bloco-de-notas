@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 
+import threading
 import chardet
 import os
 
@@ -47,7 +48,8 @@ class Aplicativo:
         self.mensagem = self.conteudo.get(1.0, END)
 
     def novaJanela(self):
-        novaJanela()
+        aplicativo = threading.Thread(target=self.abrirApp)
+        aplicativo.start()
 
     def carregar(self):
         copia = self.diretorio
@@ -126,6 +128,10 @@ class Aplicativo:
         else:
             self.atual.destroy()
 
+    # Outras funções
+    def abrirApp(self):
+        os.system('python3 aplicativo.pyw')
+
 
 class Aspecto:
     def __init__(self, master=None):
@@ -139,11 +145,16 @@ class Aspecto:
             master.tk.call('wm', 'iconphoto', master._w, img)
 
 
-def novaJanela():
+def principal():
     janela = Tk()
     Aplicativo(janela)
     Aspecto(janela)
     janela.mainloop()
 
 
-novaJanela()
+def iniciar():
+    aplicativo = threading.Thread(target=principal)
+    aplicativo.start()
+
+
+iniciar()
