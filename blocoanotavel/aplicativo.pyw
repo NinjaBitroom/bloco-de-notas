@@ -5,10 +5,10 @@ import threading
 import chardet
 import os
 
-from blocoanotavel.barrasuperior import BarraSuperior
-from blocoanotavel.conteudo import Conteudo
-from blocoanotavel.barrainferior import BarraInferior
-from blocoanotavel.janelasalvar import JanelaSalvar
+from barrasuperior import BarraSuperior
+from conteudo import Conteudo
+from barrainferior import BarraInferior
+from janelasalvar import JanelaSalvar
 
 
 class Aplicativo:
