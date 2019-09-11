@@ -1,8 +1,11 @@
+#!/usr/bin/python
+
 from tkinter import *
 from tkinter import filedialog
 
 import threading
 import chardet
+import sys
 import os
 
 from barrasuperior import BarraSuperior
@@ -13,9 +16,13 @@ from janelasalvar import JanelaSalvar
 
 class Aplicativo:
     def __init__(self, master=None):
+        if len(sys.argv) < 2:
+            self.diretorio = 'Arquivo novo'
+        else:
+            self.diretorio = sys.argv[1]
+
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
-        self.diretorio = 'Arquivo novo'
         self.atual = master
 
         self.barraDeMenu = Menu(master)
@@ -40,6 +47,12 @@ class Aplicativo:
 
         master.after(0, self.verificarSalvamento)
         master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
+
+        if self.diretorio != 'Arquivo novo':
+            self.tentarAbrir()
+            self.conteudo.delete(1.0, END)
+            self.conteudo.insert(END, self.mensagem)
+            self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
 
     # Funções da Barra Superior
     def novo(self):
