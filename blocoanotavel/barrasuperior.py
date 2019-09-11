@@ -8,7 +8,6 @@ class BarraSuperior:
         master.menuDeArquivo.add_command(label='Salvar como...', command=master.salvarComo)
         master.menuDeArquivo.add_separator()
         master.menuDeArquivo.add_command(label='Fechar', command=master.fecharJanela)
-        master.menuDeArquivo.add_command(label='Fechar tudo', command=exit)
 
         master.barraDeMenu.add_cascade(label='Codificação', menu=master.menuDeCodigo)
         master.menuDeCodigo.add_command(label='UTF-8', command=lambda: master.mudarCodificacao('UTF-8'))
