@@ -152,9 +152,4 @@ def principal():
     janela.mainloop()
 
 
-def iniciar():
-    aplicativo = threading.Thread(target=principal)
-    aplicativo.start()
-
-
-iniciar()
+principal()
