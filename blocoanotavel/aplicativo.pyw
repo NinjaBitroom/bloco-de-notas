@@ -150,7 +150,8 @@ class Aplicativo:
 
     # Outras funções
     def abrirApp(self):
-        os.system('python3 aplicativo.pyw')
+        os.system('chmod +X aplicativo.pyw')
+        os.system('./aplicativo.pyw')
 
 
 class Aspecto:
