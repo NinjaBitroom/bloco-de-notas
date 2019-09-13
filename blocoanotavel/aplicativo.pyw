@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3.7
+# -*- coding: utf-8 -*-
 
 from tkinter import *
 from tkinter import filedialog
@@ -20,6 +21,11 @@ class Aplicativo:
             self.diretorio = 'Arquivo novo'
         else:
             self.diretorio = sys.argv[1]
+            try:
+                arquivo = open(self.diretorio)
+                arquivo.close()
+            except FileNotFoundError:
+                self.diretorio = 'Arquivo novo'
 
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
