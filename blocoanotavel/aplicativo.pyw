@@ -45,14 +45,16 @@ class Aplicativo:
         Conteudo(self)
         BarraInferior(self)
 
-        master.after(0, self.verificarSalvamento)
         master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
+        master.bind('<KeyPress>', self.verificarSalvamento)
 
         if self.diretorio != 'Arquivo novo':
             self.tentarAbrir()
             self.conteudo.delete(1.0, END)
             self.conteudo.insert(END, self.mensagem)
             self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
+
+        self.verificarSalvamento()
 
     # Funções da Barra Superior
     def novo(self):
@@ -123,14 +125,13 @@ class Aplicativo:
         arquivo.close()
 
     # Funções que verificam o estado do texto do conteúdo
-    def verificarSalvamento(self):
+    def verificarSalvamento(self, evento=None):
         if self.mensagem == self.conteudo.get(0.0, END):
             self.atual.title(f'{self.diretorio}   -   Bloco de Notas')
             self.arquivoSalvo = True
         else:
             self.atual.title(f'{self.diretorio} * -   Bloco de Notas')
             self.arquivoSalvo = False
-        self.atual.after(10, self.verificarSalvamento)
 
     def fecharJanela(self):
         if self.janelaDeSalvar:
