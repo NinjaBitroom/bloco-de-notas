@@ -1,5 +1,5 @@
 # bloco-de-notas
-Bloco de notas com Python e Tkinter
+Bloco de notas feito com Python e Tkinter para Windows e Linux
 
  Requisitos
 ----------------
