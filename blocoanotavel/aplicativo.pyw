@@ -150,8 +150,11 @@ class Aplicativo:
 
     # Outras funções
     def abrirApp(self):
-        os.system('chmod +X aplicativo.pyw')
-        os.system('./aplicativo.pyw')
+        if os.name == 'nt':
+            os.system('python aplicativo.pyw')
+        else:
+            os.system('chmod +X aplicativo.pyw')
+            os.system('./aplicativo.pyw')
 
 
 class Aspecto:
