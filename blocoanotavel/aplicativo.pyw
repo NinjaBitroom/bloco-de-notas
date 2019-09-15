@@ -64,9 +64,13 @@ class Aplicativo:
 
     # Funções da Barra Superior
     def novo(self):
-        self.diretorio = 'Arquivo novo'
-        self.conteudo.delete(1.0, END)
-        self.mensagem = self.conteudo.get(1.0, END)
+        if self.arquivoSalvo:
+            self.diretorio = 'Arquivo novo'
+            self.conteudo.delete(1.0, END)
+            self.mensagem = self.conteudo.get(1.0, END)
+        else:
+            self.janelaDeSalvar = Toplevel()
+            JanelaSalvar(self, 'novo')
 
     def novaJanela(self):
         aplicativo = threading.Thread(target=self.abrirApp)
@@ -144,7 +148,7 @@ class Aplicativo:
             self.janelaDeSalvar.lift()
         elif not self.arquivoSalvo:
             self.janelaDeSalvar = Toplevel()
-            JanelaSalvar(self)
+            JanelaSalvar(self, 'fechar')
         else:
             self.atual.destroy()
 
