@@ -2,8 +2,9 @@ from tkinter import Label, NSEW, Button
 
 
 class JanelaSalvar:
-    def __init__(self, master):
+    def __init__(self, master, atividade='fechar'):
         self.mestre = master
+        self.atividade = atividade
         master.janelaDeSalvar.geometry('250x100+500+500')
         master.janelaDeSalvar.title(master.diretorio)
         master.janelaDeSalvar.grid_columnconfigure(0, weight=1)
@@ -34,12 +35,21 @@ class JanelaSalvar:
     def sairSalvando(self):
         self.mestre.salvar()
         self.mestre.janelaDeSalvar.destroy()
-        self.mestre.atual.destroy()
+        self.ato(self.atividade)
+        self.mestre.janelaDeSalvar = None
 
     def sairSemSalvar(self):
         self.mestre.janelaDeSalvar.destroy()
-        self.mestre.atual.destroy()
+        self.ato(self.atividade)
+        self.mestre.janelaDeSalvar = None
 
     def cancelar(self):
         self.mestre.janelaDeSalvar.destroy()
         self.mestre.janelaDeSalvar = None
+
+    def ato(self, ato='fechar'):
+        atos = {'fechar': self.mestre.atual.destroy,
+                'novo': self.mestre.novo,
+                'carregar': self.mestre.carregar}
+
+        return atos[ato]()
