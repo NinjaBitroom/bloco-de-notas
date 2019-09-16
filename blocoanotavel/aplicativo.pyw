@@ -64,26 +64,56 @@ class Aplicativo:
 
     # Funções da Barra Superior
     def novo(self):
-        self.diretorio = 'Arquivo novo'
-        self.conteudo.delete(1.0, END)
-        self.mensagem = self.conteudo.get(1.0, END)
+        if self.janelaDeSalvar:
+            self.janelaDeSalvar.destroy()
+            self.janelaDeSalvar = None
+            self.diretorio = 'Arquivo novo'
+            self.conteudo.delete(1.0, END)
+            self.mensagem = self.conteudo.get(1.0, END)
+            self.verificarSalvamento()
+        elif self.arquivoSalvo:
+            self.diretorio = 'Arquivo novo'
+            self.conteudo.delete(1.0, END)
+            self.mensagem = self.conteudo.get(1.0, END)
+        else:
+            self.janelaDeSalvar = Toplevel()
+            JanelaSalvar(self, 'novo')
 
     def novaJanela(self):
         aplicativo = threading.Thread(target=self.abrirApp)
         aplicativo.start()
 
     def carregar(self):
-        copia = self.diretorio
-        self.diretorio = filedialog.askopenfilename(defaultextension='.txt',
-                                                    filetypes=[('Arquivos de texto', '.txt'),
-                                                               ('Todos arquivos', '.*')])
-        if not self.diretorio:
-            self.diretorio = copia
+        if self.janelaDeSalvar:
+            self.janelaDeSalvar.destroy()
+            self.janelaDeSalvar = None
+            copia = self.diretorio
+            self.diretorio = filedialog.askopenfilename(defaultextension='.txt',
+                                                        filetypes=[('Arquivos de texto', '.txt'),
+                                                                   ('Todos arquivos', '.*')])
+            if not self.diretorio:
+                self.diretorio = copia
+            else:
+                self.tentarAbrir()
+                self.conteudo.delete(1.0, END)
+                self.conteudo.insert(END, self.mensagem)
+                self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
+            self.verificarSalvamento()
+        elif self.arquivoSalvo:
+            copia = self.diretorio
+            self.diretorio = filedialog.askopenfilename(defaultextension='.txt',
+                                                        filetypes=[('Arquivos de texto', '.txt'),
+                                                                   ('Todos arquivos', '.*')])
+            if not self.diretorio:
+                self.diretorio = copia
+            else:
+                self.tentarAbrir()
+                self.conteudo.delete(1.0, END)
+                self.conteudo.insert(END, self.mensagem)
+                self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
         else:
-            self.tentarAbrir()
-            self.conteudo.delete(1.0, END)
-            self.conteudo.insert(END, self.mensagem)
-            self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
+            self.janelaDeSalvar = Toplevel()
+            JanelaSalvar(self, 'carregar')
 
     def salvar(self):
         if self.diretorio == 'Arquivo novo':
@@ -144,7 +174,7 @@ class Aplicativo:
             self.janelaDeSalvar.lift()
         elif not self.arquivoSalvo:
             self.janelaDeSalvar = Toplevel()
-            JanelaSalvar(self)
+            JanelaSalvar(self, 'fechar')
         else:
             self.atual.destroy()
 
