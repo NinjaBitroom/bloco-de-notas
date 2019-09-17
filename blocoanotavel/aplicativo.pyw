@@ -70,7 +70,6 @@ class Aplicativo:
             self.diretorio = 'Arquivo novo'
             self.conteudo.delete(1.0, END)
             self.mensagem = self.conteudo.get(1.0, END)
-            self.verificarSalvamento()
         elif self.arquivoSalvo:
             self.diretorio = 'Arquivo novo'
             self.conteudo.delete(1.0, END)
@@ -78,6 +77,7 @@ class Aplicativo:
         else:
             self.janelaDeSalvar = Toplevel()
             JanelaSalvar(self, 'novo')
+        self.verificarSalvamento()
 
     def novaJanela(self):
         aplicativo = threading.Thread(target=self.abrirApp)
@@ -98,7 +98,6 @@ class Aplicativo:
                 self.conteudo.delete(1.0, END)
                 self.conteudo.insert(END, self.mensagem)
                 self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
-            self.verificarSalvamento()
         elif self.arquivoSalvo:
             copia = self.diretorio
             self.diretorio = filedialog.askopenfilename(defaultextension='.txt',
@@ -114,12 +113,14 @@ class Aplicativo:
         else:
             self.janelaDeSalvar = Toplevel()
             JanelaSalvar(self, 'carregar')
+        self.verificarSalvamento()
 
     def salvar(self):
         if self.diretorio == 'Arquivo novo':
             self.salvarComo()
         else:
             self.salvarArquivo()
+        self.verificarSalvamento()
 
     def salvarComo(self):
         copia = self.diretorio
@@ -131,6 +132,7 @@ class Aplicativo:
             self.diretorio = copia
         else:
             self.salvarArquivo()
+        self.verificarSalvamento()
 
     def mudarCodificacao(self, norma):
         self.chaveAtual = norma
@@ -170,6 +172,7 @@ class Aplicativo:
             self.arquivoSalvo = False
 
     def fecharJanela(self):
+        self.verificarSalvamento()
         if self.janelaDeSalvar:
             self.janelaDeSalvar.lift()
         elif not self.arquivoSalvo:
