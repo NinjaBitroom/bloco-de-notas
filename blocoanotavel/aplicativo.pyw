@@ -183,7 +183,6 @@ class Aplicativo:
         if os.name == 'nt':
             os.system('python aplicativo.pyw')
         else:
-            os.system('chmod +X aplicativo.pyw')
             os.system('./aplicativo.pyw')
 
 
