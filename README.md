@@ -9,4 +9,4 @@ Bloco de notas feito com Python e Tkinter para Windows e Linux
 
 ## Atenção!
 Para o comando "Nova janela" funcionar no linux é necessário ativar as permissões
-de execução para o arquivo [aplicativo.pyw].
+de execução para o arquivo `aplicativo.pyw`.
