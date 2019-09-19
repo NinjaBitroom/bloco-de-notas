@@ -1,10 +1,11 @@
-from tkinter import Label, NSEW, Button
+from tkinter import Label, NSEW, Button, Toplevel
 
 
 class JanelaSalvar:
     def __init__(self, master, atividade='fechar'):
         self.mestre = master
         self.atividade = atividade
+        master.janelaDeSalvar = Toplevel()
         master.janelaDeSalvar.geometry('250x100+500+500')
         master.janelaDeSalvar.title(master.diretorio)
         master.janelaDeSalvar.grid_columnconfigure(0, weight=1)

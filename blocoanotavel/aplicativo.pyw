@@ -75,7 +75,6 @@ class Aplicativo:
             self.conteudo.delete(1.0, END)
             self.mensagem = self.conteudo.get(1.0, END)
         else:
-            self.janelaDeSalvar = Toplevel()
             JanelaSalvar(self, 'novo')
         self.verificarSalvamento()
 
@@ -111,7 +110,6 @@ class Aplicativo:
                 self.conteudo.insert(END, self.mensagem)
                 self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
         else:
-            self.janelaDeSalvar = Toplevel()
             JanelaSalvar(self, 'carregar')
         self.verificarSalvamento()
 
@@ -176,7 +174,6 @@ class Aplicativo:
         if self.janelaDeSalvar:
             self.janelaDeSalvar.lift()
         elif not self.arquivoSalvo:
-            self.janelaDeSalvar = Toplevel()
             JanelaSalvar(self, 'fechar')
         else:
             self.atual.destroy()
