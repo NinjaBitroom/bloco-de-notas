@@ -4,6 +4,7 @@
 from tkinter import *
 from tkinter import filedialog
 
+import subprocess
 import threading
 import chardet
 import sys
@@ -181,7 +182,7 @@ class Aplicativo:
     # Outras funções
     def abrirApp(self):
         if os.name == 'nt':
-            os.system('python aplicativo.pyw')
+            subprocess.call(['pythonw', 'aplicativo.pyw'])
         else:
             os.system('./aplicativo.pyw')
 
