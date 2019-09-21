@@ -66,8 +66,6 @@ class Aplicativo:
     # Funções da Barra Superior
     def novo(self):
         if self.janelaDeSalvar:
-            self.janelaDeSalvar.destroy()
-            self.janelaDeSalvar = None
             self.diretorio = 'Arquivo novo'
             self.conteudo.delete(1.0, END)
             self.mensagem = self.conteudo.get(1.0, END)
@@ -85,8 +83,6 @@ class Aplicativo:
 
     def carregar(self):
         if self.janelaDeSalvar:
-            self.janelaDeSalvar.destroy()
-            self.janelaDeSalvar = None
             copia = self.diretorio
             self.diretorio = filedialog.askopenfilename(defaultextension='.txt',
                                                         filetypes=[('Arquivos de texto', '.txt'),
