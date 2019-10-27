@@ -28,7 +28,7 @@ class JanelaSalvar:
         botaoCancelar.grid(column=2, row=1)
 
         master.janelaDeSalvar.resizable(False, False)
-        master.janelaDeSalvar.transient(master.atual)
+        master.janelaDeSalvar.transient(master)
         master.janelaDeSalvar.focus_force()
         master.janelaDeSalvar.grab_set()
         master.janelaDeSalvar.protocol('WM_DELETE_WINDOW', self.cancelar)
@@ -49,7 +49,7 @@ class JanelaSalvar:
         self.mestre.janelaDeSalvar = None
 
     def ato(self, ato='fechar'):
-        atos = {'fechar': self.mestre.atual.destroy,
+        atos = {'fechar': self.mestre.destroy,
                 'novo': self.mestre.novo,
                 'carregar': self.mestre.carregar}
 

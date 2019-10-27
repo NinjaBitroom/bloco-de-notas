@@ -14,4 +14,4 @@ class BarraSuperior:
         master.menuDeCodigo.add_command(label='UTF-16', command=lambda: master.mudarCodificacao('UTF-16'))
         master.menuDeCodigo.add_command(label='UTF-32', command=lambda: master.mudarCodificacao('UTF-32'))
         master.menuDeCodigo.add_command(label='ASCII', command=lambda: master.mudarCodificacao('ASCII'))
-        master.atual.config(menu=master.barraDeMenu)
+        master.config(menu=master.barraDeMenu)

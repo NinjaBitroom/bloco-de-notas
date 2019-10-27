@@ -33,7 +33,6 @@ class Aplicativo(Tk):
 
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
-        self.atual = self
 
         self.barraDeMenu = Menu(self)
         self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
@@ -147,10 +146,10 @@ class Aplicativo(Tk):
     # Funções que verificam o estado do texto do conteúdo
     def verificarSalvamento(self, evento=None):
         if self.mensagem == self.conteudo.get(0.0, END):
-            self.atual.title(f'{self.diretorio}   -   Bloco de Notas')
+            self.title(f'{self.diretorio}   -   Bloco de Notas')
             self.arquivoSalvo = True
         else:
-            self.atual.title(f'{self.diretorio} * -   Bloco de Notas')
+            self.title(f'{self.diretorio} * -   Bloco de Notas')
             self.arquivoSalvo = False
 
     def fecharJanela(self):
@@ -160,7 +159,7 @@ class Aplicativo(Tk):
         elif not self.arquivoSalvo:
             JanelaSalvar(self, 'fechar')
         else:
-            self.atual.destroy()
+            self.destroy()
 
     # Outras funções
     def abrirApp(self):
