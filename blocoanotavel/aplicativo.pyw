@@ -169,10 +169,7 @@ class Aplicativo:
             os.system('./aplicativo.pyw')
 
 
-def principal():
+if __name__ == '__main__':
     janela = Tk()
     Aplicativo(janela)
     janela.mainloop()
-
-
-principal()
