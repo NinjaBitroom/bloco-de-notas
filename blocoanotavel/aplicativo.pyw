@@ -21,15 +21,8 @@ class Aplicativo(Tk):
     def __init__(self):
         Tk.__init__(self)
         Aspecto(self)
-        if len(sys.argv) < 2:
-            self.diretorio = 'Arquivo novo'
-        else:
-            self.diretorio = sys.argv[1]
-            try:
-                arquivo = open(self.diretorio)
-                arquivo.close()
-            except FileNotFoundError:
-                self.diretorio = 'Arquivo novo'
+
+        self.receberArquivo()
 
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
@@ -57,12 +50,7 @@ class Aplicativo(Tk):
         self.protocol('WM_DELETE_WINDOW', self.fecharJanela)
         self.bind('<KeyPress>', self.verificarSalvamento)
 
-        if self.diretorio != 'Arquivo novo':
-            self.tentarAbrir()
-            self.conteudo.delete(1.0, END)
-            self.conteudo.insert(END, self.mensagem)
-            self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
-
+        self.verificarDiretorio()
         self.verificarSalvamento()
 
     # Funções da Barra Superior
@@ -88,10 +76,7 @@ class Aplicativo(Tk):
             if not self.diretorio:
                 self.diretorio = copia
             else:
-                self.tentarAbrir()
-                self.conteudo.delete(1.0, END)
-                self.conteudo.insert(END, self.mensagem)
-                self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
+                self.substituirConteudo()
         else:
             JanelaSalvar(self, 'carregar')
         self.verificarSalvamento()
@@ -167,6 +152,27 @@ class Aplicativo(Tk):
             subprocess.call(['pythonw', 'aplicativo.pyw'])
         else:
             os.system('./aplicativo.pyw')
+
+    def receberArquivo(self):
+        if len(sys.argv) < 2:
+            self.diretorio = 'Arquivo novo'
+        else:
+            self.diretorio = sys.argv[1]
+            try:
+                arquivo = open(self.diretorio)
+                arquivo.close()
+            except FileNotFoundError:
+                self.diretorio = 'Arquivo novo'
+
+    def verificarDiretorio(self):
+        if self.diretorio != 'Arquivo novo':
+            self.substituirConteudo()
+
+    def substituirConteudo(self):
+        self.tentarAbrir()
+        self.conteudo.delete(1.0, END)
+        self.conteudo.insert(END, self.mensagem)
+        self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
 
 
 if __name__ == '__main__':
