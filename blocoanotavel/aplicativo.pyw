@@ -10,6 +10,7 @@ import chardet
 import sys
 import os
 
+from aspecto import Aspecto
 from barrasuperior import BarraSuperior
 from conteudo import Conteudo
 from barrainferior import BarraInferior
@@ -18,6 +19,7 @@ from janelasalvar import JanelaSalvar
 
 class Aplicativo:
     def __init__(self, master=None):
+        Aspecto(master)
         if len(sys.argv) < 2:
             self.diretorio = 'Arquivo novo'
         else:
@@ -167,22 +169,9 @@ class Aplicativo:
             os.system('./aplicativo.pyw')
 
 
-class Aspecto:
-    def __init__(self, master=None):
-        master.geometry('600x400')
-        master.grid_columnconfigure(1, weight=1)
-        master.grid_rowconfigure(1, weight=1)
-        if os.name == 'nt':
-            master.iconbitmap('arquivos/icone.ico')
-        else:
-            img = PhotoImage(file='arquivos/icone.gif')
-            master.tk.call('wm', 'iconphoto', master._w, img)
-
-
 def principal():
     janela = Tk()
     Aplicativo(janela)
-    Aspecto(janela)
     janela.mainloop()
 
 
