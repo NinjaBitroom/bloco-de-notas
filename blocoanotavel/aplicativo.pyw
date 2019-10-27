@@ -17,9 +17,10 @@ from barrainferior import BarraInferior
 from janelasalvar import JanelaSalvar
 
 
-class Aplicativo:
-    def __init__(self, master=None):
-        Aspecto(master)
+class Aplicativo(Tk):
+    def __init__(self):
+        Tk.__init__(self)
+        Aspecto(self)
         if len(sys.argv) < 2:
             self.diretorio = 'Arquivo novo'
         else:
@@ -32,19 +33,19 @@ class Aplicativo:
 
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
-        self.atual = master
+        self.atual = self
 
-        self.barraDeMenu = Menu(master)
+        self.barraDeMenu = Menu(self)
         self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
         self.menuDeCodigo = Menu(self.barraDeMenu, tearoff=0)
 
-        self.barraVertical = Scrollbar(master, orient=VERTICAL)
-        self.barraHorizontal = Scrollbar(master, orient=HORIZONTAL)
-        self.conteudo = Text(master, height=0, width=0, wrap=NONE,
+        self.barraVertical = Scrollbar(self, orient=VERTICAL)
+        self.barraHorizontal = Scrollbar(self, orient=HORIZONTAL)
+        self.conteudo = Text(self, height=0, width=0, wrap=NONE,
                              xscrollcommand=self.barraHorizontal.set,
                              yscrollcommand=self.barraVertical.set)
 
-        self.barraInferior = Label(master)
+        self.barraInferior = Label(self)
         self.status = Label(self.barraInferior, text=self.chaveAtual)
 
         self.janelaDeSalvar = None
@@ -54,8 +55,8 @@ class Aplicativo:
         Conteudo(self)
         BarraInferior(self)
 
-        master.protocol('WM_DELETE_WINDOW', self.fecharJanela)
-        master.bind('<KeyPress>', self.verificarSalvamento)
+        self.protocol('WM_DELETE_WINDOW', self.fecharJanela)
+        self.bind('<KeyPress>', self.verificarSalvamento)
 
         if self.diretorio != 'Arquivo novo':
             self.tentarAbrir()
@@ -170,6 +171,4 @@ class Aplicativo:
 
 
 if __name__ == '__main__':
-    janela = Tk()
-    Aplicativo(janela)
-    janela.mainloop()
+    Aplicativo().mainloop()
