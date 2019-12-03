@@ -11,10 +11,10 @@ import sys
 import os
 
 from aspecto import Aspecto
-from barrasuperior import BarraSuperior
-from conteudo import Conteudo
-from barrainferior import BarraInferior
-from janelasalvar import JanelaSalvar
+from widgets.barrasuperior import BarraSuperior
+from widgets.conteudo import Conteudo
+from widgets.barrainferior import BarraInferior
+from widgets.janelasalvar import JanelaSalvar
 
 
 class Aplicativo(Tk):
