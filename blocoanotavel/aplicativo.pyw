@@ -22,6 +22,7 @@ class Aplicativo(Tk):
         Tk.__init__(self)
         Aspecto(self)
 
+        self.diretorio = ''
         self.receberArquivo()
 
         self.arquivoSalvo = False
