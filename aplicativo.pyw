@@ -19,7 +19,7 @@ from widgets.janelasalvar import JanelaSalvar
 
 class Aplicativo(Tk):
     def __init__(self):
-        Tk.__init__(self)
+        super().__init__()
         Aspecto(self)
 
         self.diretorio = ''
