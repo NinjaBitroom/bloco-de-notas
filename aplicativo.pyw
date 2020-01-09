@@ -28,21 +28,16 @@ class Aplicativo(Tk):
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
 
-        self.barraVertical = Scrollbar(self, orient=VERTICAL)
-        self.barraHorizontal = Scrollbar(self, orient=HORIZONTAL)
-        self.conteudo = Text(self, height=0, width=0, wrap=NONE,
-                             xscrollcommand=self.barraHorizontal.set,
-                             yscrollcommand=self.barraVertical.set)
-
         self.barraInferior = Label(self)
         self.status = Label(self.barraInferior, text=self.chaveAtual)
 
         self.janelaDeSalvar = None
-        self.mensagem = self.conteudo.get(1.0, END)
 
-        BarraSuperior(self)
-        Conteudo(self)
-        BarraInferior(self)
+        self.barrasuperior = BarraSuperior(self)
+        self.conteudo = Conteudo(self)
+        self.barrainferior = BarraInferior(self)
+
+        self.mensagem = self.conteudo.conteudo.get(1.0, END)
 
         self.protocol('WM_DELETE_WINDOW', self.fecharJanela)
         self.bind('<KeyPress>', self.verificarSalvamento)
@@ -54,8 +49,8 @@ class Aplicativo(Tk):
     def novo(self):
         if self.janelaDeSalvar or self.arquivoSalvo:
             self.diretorio = 'Arquivo novo'
-            self.conteudo.delete(1.0, END)
-            self.mensagem = self.conteudo.get(1.0, END)
+            self.conteudo.conteudo.delete(1.0, END)
+            self.mensagem = self.conteudo.conteudo.get(1.0, END)
         else:
             JanelaSalvar(self, 'novo')
         self.verificarSalvamento()
@@ -119,7 +114,7 @@ class Aplicativo(Tk):
 
     def salvarArquivo(self):
         arquivo = open(self.diretorio, 'w', encoding=self.chaveAtual)
-        texto = self.conteudo.get(1.0, END)
+        texto = self.conteudo.conteudo.get(1.0, END)
         arquivo.write(texto)
         arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
         self.mensagem = arquivo.read()
@@ -127,7 +122,7 @@ class Aplicativo(Tk):
 
     # Funções que verificam o estado do texto do conteúdo
     def verificarSalvamento(self, evento=None):
-        if self.mensagem == self.conteudo.get(0.0, END):
+        if self.mensagem == self.conteudo.conteudo.get(0.0, END):
             self.title(f'{self.diretorio}   -   Bloco de Notas')
             self.arquivoSalvo = True
         else:
@@ -167,9 +162,9 @@ class Aplicativo(Tk):
 
     def substituirConteudo(self):
         self.tentarAbrir()
-        self.conteudo.delete(1.0, END)
-        self.conteudo.insert(END, self.mensagem)
-        self.conteudo.delete(float(self.conteudo.index(END)) - 1.0)
+        self.conteudo.conteudo.delete(1.0, END)
+        self.conteudo.conteudo.insert(END, self.mensagem)
+        self.conteudo.conteudo.delete(float(self.conteudo.conteudo.index(END)) - 1.0)
 
 
 if __name__ == '__main__':
