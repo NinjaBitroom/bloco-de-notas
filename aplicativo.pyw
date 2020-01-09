@@ -50,7 +50,7 @@ class Aplicativo(Tk):
             self.conteudo.conteudo.delete(1.0, END)
             self.mensagem = self.conteudo.conteudo.get(1.0, END)
         else:
-            JanelaSalvar(self, 'novo')
+            self.janelaDeSalvar = JanelaSalvar(self, 'novo')
         self.verificarSalvamento()
 
     def novaJanela(self):
@@ -68,7 +68,7 @@ class Aplicativo(Tk):
             else:
                 self.substituirConteudo()
         else:
-            JanelaSalvar(self, 'carregar')
+            self.janelaDeSalvar = JanelaSalvar(self, 'carregar')
         self.verificarSalvamento()
 
     def salvar(self):
@@ -92,7 +92,7 @@ class Aplicativo(Tk):
 
     def mudarCodificacao(self, norma):
         self.chaveAtual = norma
-        self.status['text'] = self.chaveAtual
+        self.barraInferior.status['text'] = self.chaveAtual
 
     # Métodos de manipulação de arquivos
     def tentarAbrir(self):
@@ -108,7 +108,7 @@ class Aplicativo(Tk):
             self.chaveAtual = chute['encoding']
         finally:
             arquivo.close()
-            self.status['text'] = self.chaveAtual
+            self.barraInferior.status['text'] = self.chaveAtual
 
     def salvarArquivo(self):
         arquivo = open(self.diretorio, 'w', encoding=self.chaveAtual)
@@ -132,7 +132,7 @@ class Aplicativo(Tk):
         if self.janelaDeSalvar:
             self.janelaDeSalvar.lift()
         elif not self.arquivoSalvo:
-            JanelaSalvar(self, 'fechar')
+            self.janelaDeSalvar = JanelaSalvar(self, 'fechar')
         else:
             self.destroy()
 
