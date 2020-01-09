@@ -28,14 +28,11 @@ class Aplicativo(Tk):
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
 
-        self.barraInferior = Label(self)
-        self.status = Label(self.barraInferior, text=self.chaveAtual)
-
         self.janelaDeSalvar = None
 
-        self.barrasuperior = BarraSuperior(self)
+        self.barraSuperior = BarraSuperior(self)
         self.conteudo = Conteudo(self)
-        self.barrainferior = BarraInferior(self)
+        self.barraInferior = BarraInferior(self)
 
         self.mensagem = self.conteudo.conteudo.get(1.0, END)
 
