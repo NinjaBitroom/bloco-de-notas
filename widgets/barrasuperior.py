@@ -1,17 +1,24 @@
+from tkinter import Menu
+
+
 class BarraSuperior:
     def __init__(self, master):
-        master.barraDeMenu.add_cascade(label='Arquivo', menu=master.menuDeArquivo)
-        master.menuDeArquivo.add_command(label='Novo', command=master.novo)
-        master.menuDeArquivo.add_command(label='Nova janela', command=master.novaJanela)
-        master.menuDeArquivo.add_command(label='Carregar...', command=master.carregar)
-        master.menuDeArquivo.add_command(label='Salvar', command=master.salvar)
-        master.menuDeArquivo.add_command(label='Salvar como...', command=master.salvarComo)
-        master.menuDeArquivo.add_separator()
-        master.menuDeArquivo.add_command(label='Fechar', command=master.fecharJanela)
+        self.barraDeMenu = Menu(master)
+        self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
+        self.menuDeCodigo = Menu(self.barraDeMenu, tearoff=0)
 
-        master.barraDeMenu.add_cascade(label='Codificação', menu=master.menuDeCodigo)
-        master.menuDeCodigo.add_command(label='UTF-8', command=lambda: master.mudarCodificacao('UTF-8'))
-        master.menuDeCodigo.add_command(label='UTF-16', command=lambda: master.mudarCodificacao('UTF-16'))
-        master.menuDeCodigo.add_command(label='UTF-32', command=lambda: master.mudarCodificacao('UTF-32'))
-        master.menuDeCodigo.add_command(label='ASCII', command=lambda: master.mudarCodificacao('ASCII'))
-        master.config(menu=master.barraDeMenu)
+        self.barraDeMenu.add_cascade(label='Arquivo', menu=self.menuDeArquivo)
+        self.menuDeArquivo.add_command(label='Novo', command=master.novo)
+        self.menuDeArquivo.add_command(label='Nova janela', command=master.novaJanela)
+        self.menuDeArquivo.add_command(label='Carregar...', command=master.carregar)
+        self.menuDeArquivo.add_command(label='Salvar', command=master.salvar)
+        self.menuDeArquivo.add_command(label='Salvar como...', command=master.salvarComo)
+        self.menuDeArquivo.add_separator()
+        self.menuDeArquivo.add_command(label='Fechar', command=master.fecharJanela)
+
+        self.barraDeMenu.add_cascade(label='Codificação', menu=self.menuDeCodigo)
+        self.menuDeCodigo.add_command(label='UTF-8', command=lambda: master.mudarCodificacao('UTF-8'))
+        self.menuDeCodigo.add_command(label='UTF-16', command=lambda: master.mudarCodificacao('UTF-16'))
+        self.menuDeCodigo.add_command(label='UTF-32', command=lambda: master.mudarCodificacao('UTF-32'))
+        self.menuDeCodigo.add_command(label='ASCII', command=lambda: master.mudarCodificacao('ASCII'))
+        master.config(menu=self.barraDeMenu)

@@ -28,10 +28,6 @@ class Aplicativo(Tk):
         self.arquivoSalvo = False
         self.chaveAtual = 'UTF-8'
 
-        self.barraDeMenu = Menu(self)
-        self.menuDeArquivo = Menu(self.barraDeMenu, tearoff=0)
-        self.menuDeCodigo = Menu(self.barraDeMenu, tearoff=0)
-
         self.barraVertical = Scrollbar(self, orient=VERTICAL)
         self.barraHorizontal = Scrollbar(self, orient=HORIZONTAL)
         self.conteudo = Text(self, height=0, width=0, wrap=NONE,
