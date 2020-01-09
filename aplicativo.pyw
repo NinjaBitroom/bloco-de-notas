@@ -20,7 +20,8 @@ from widgets.janelasalvar import JanelaSalvar
 class Aplicativo(Tk):
     def __init__(self):
         super().__init__()
-        Aspecto(self)
+
+        self.aspecto = Aspecto(self)
 
         self.diretorio = ''
         self.receberArquivo()
