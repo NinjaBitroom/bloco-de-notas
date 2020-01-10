@@ -97,18 +97,15 @@ class Aplicativo(Tk):
 
     # Métodos de manipulação de arquivos
     def tentarAbrir(self):
+        with open(self.diretorio, 'rb') as arquivo:
+            self.bytes = arquivo.read()
         try:
-            arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
-            self.mensagem = arquivo.read()
-        except (UnicodeDecodeError, UnicodeError):
-            arquivo = open(self.diretorio, 'br')
-            self.mensagem = arquivo.read()
-            chute = chardet.detect(self.mensagem)
-            arquivo = open(self.diretorio, 'r', encoding=chute['encoding'])
-            self.mensagem = arquivo.read()
+            self.mensagem = self.bytes.decode(self.chaveAtual)
+        except UnicodeDecodeError:
+            chute = chardet.detect(self.bytes)
+            self.mensagem = self.bytes.decode(chute['encoding'])
             self.chaveAtual = chute['encoding']
         finally:
-            arquivo.close()
             self.barraInferior.status['text'] = self.chaveAtual
 
     def salvarArquivo(self):
