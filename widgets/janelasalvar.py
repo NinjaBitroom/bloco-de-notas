@@ -23,10 +23,10 @@ class JanelaSalvar(Toplevel):
         pergunta.grid(column=0, row=0, columnspan=3, sticky=NSEW)
         pergunta['font'] = ('Arial', 20)
 
-        botaoSalvar = Button(self, text='Salvar', width=9, command=self.sairSalvando)
+        botaoSalvar = Button(self, text='Salvar', width=9, command=self.salvar)
         botaoSalvar.grid(column=0, row=1)
 
-        botaoNaoSalvar = Button(self, text='Não salvar', width=9, command=self.sairSemSalvar)
+        botaoNaoSalvar = Button(self, text='Não salvar', width=9, command=self.perder)
         botaoNaoSalvar.grid(column=1, row=1)
 
         botaoCancelar = Button(self, text='Cancelar', width=9, command=self.cancelar)
@@ -38,14 +38,14 @@ class JanelaSalvar(Toplevel):
         self.grab_set()
         self.protocol('WM_DELETE_WINDOW', self.cancelar)
 
-    def sairSalvando(self):
+    def salvar(self):
         self.mestre.salvar()
         self.destroy()
         if self.mestre.arquivoSalvo:
             self.atos[self.atividade]()
         self.mestre.janelaDeSalvar = None
 
-    def sairSemSalvar(self):
+    def perder(self):
         self.destroy()
         self.atos[self.atividade]()
         self.mestre.janelaDeSalvar = None
