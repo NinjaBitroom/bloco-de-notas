@@ -36,6 +36,7 @@ class Aplicativo(Tk):
         self.barraInferior = BarraInferior(self)
 
         self.mensagem = self.conteudo.conteudo.get(1.0, END)
+        self.bytes = bytes(self.mensagem, self.chaveAtual)
 
         self.protocol('WM_DELETE_WINDOW', self.fecharJanela)
         self.bind('<KeyPress>', self.verificarSalvamento)
@@ -127,6 +128,9 @@ class Aplicativo(Tk):
             self.title(f'{self.diretorio} * -   Bloco de Notas')
             self.arquivoSalvo = False
 
+        self.bytes = bytes(self.mensagem, self.chaveAtual)
+        self.verBytes()
+
     def fecharJanela(self):
         self.verificarSalvamento()
         if self.janelaDeSalvar:
@@ -163,6 +167,9 @@ class Aplicativo(Tk):
         self.conteudo.conteudo.delete(1.0, END)
         self.conteudo.conteudo.insert(END, self.mensagem)
         self.conteudo.conteudo.delete(float(self.conteudo.conteudo.index(END)) - 1.0)
+
+    def verBytes(self):
+        print(self.bytes)
 
 
 if __name__ == '__main__':
