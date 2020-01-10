@@ -41,7 +41,8 @@ class JanelaSalvar(Toplevel):
     def sairSalvando(self):
         self.mestre.salvar()
         self.destroy()
-        self.atos[self.atividade]()
+        if self.mestre.arquivoSalvo:
+            self.atos[self.atividade]()
         self.mestre.janelaDeSalvar = None
 
     def sairSemSalvar(self):
