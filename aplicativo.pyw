@@ -109,12 +109,17 @@ class Aplicativo(Tk):
             self.barraInferior.status['text'] = self.chaveAtual
 
     def salvarArquivo(self):
-        arquivo = open(self.diretorio, 'w', encoding=self.chaveAtual)
-        texto = self.conteudo.conteudo.get(1.0, END)
-        arquivo.write(texto)
-        arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
-        self.mensagem = arquivo.read()
-        arquivo.close()
+        with open(self.diretorio, 'wb') as arquivo:
+            texto = self.conteudo.conteudo.get(1.0, END)
+            self.bytes = texto.encode(self.chaveAtual)
+            arquivo.write(self.bytes)
+            self.mensagem = self.bytes.decode(self.chaveAtual)
+#        arquivo = open(self.diretorio, 'w', encoding=self.chaveAtual)
+#        texto = self.conteudo.conteudo.get(1.0, END)
+#        arquivo.write(texto)
+#        arquivo = open(self.diretorio, 'r', encoding=self.chaveAtual)
+#        self.mensagem = arquivo.read()
+#        arquivo.close()
 
     # Funções que verificam o estado do texto do conteúdo
     def verificarSalvamento(self, evento=None):
