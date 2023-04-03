@@ -35,7 +35,7 @@ class Aplicativo(Tk):
         self.conteudo = Conteudo(self)
         self.barraInferior = BarraInferior(self)
 
-        self.mensagem = self.conteudo.conteudo.get(1.0, END)
+        self.mensagem = ''
         self.bytes = bytes(self.mensagem, self.chaveAtual)
 
         self.protocol('WM_DELETE_WINDOW', self.fecharJanela)
@@ -110,14 +110,14 @@ class Aplicativo(Tk):
 
     def salvarArquivo(self):
         with open(self.diretorio, 'wb') as arquivo:
-            texto = self.conteudo.conteudo.get(1.0, END)
+            texto = self.conteudo.conteudo.get(0.0, END)[:-1]
             self.bytes = texto.encode(self.chaveAtual)
             arquivo.write(self.bytes)
             self.mensagem = self.bytes.decode(self.chaveAtual)
 
     # Funções que verificam o estado do texto do conteúdo
     def verificarSalvamento(self, evento=None):
-        if self.mensagem == self.conteudo.conteudo.get(0.0, END):
+        if self.mensagem == self.conteudo.conteudo.get(0.0, END)[:-1]:
             self.title(f'{self.diretorio}   -   Bloco de Notas')
             self.arquivoSalvo = True
         else:
@@ -125,7 +125,6 @@ class Aplicativo(Tk):
             self.arquivoSalvo = False
 
         self.bytes = bytes(self.mensagem, self.chaveAtual)
-        self.verBytes()
 
     def fecharJanela(self):
         self.verificarSalvamento()
@@ -160,12 +159,7 @@ class Aplicativo(Tk):
 
     def substituirConteudo(self):
         self.tentarAbrir()
-        self.conteudo.conteudo.delete(1.0, END)
-        self.conteudo.conteudo.insert(END, self.mensagem)
-        self.conteudo.conteudo.delete(float(self.conteudo.conteudo.index(END)) - 1.0)
-
-    def verBytes(self):
-        print(self.bytes)
+        self.conteudo.conteudo.replace(0.0, END, self.mensagem)
 
 
 if __name__ == '__main__':
