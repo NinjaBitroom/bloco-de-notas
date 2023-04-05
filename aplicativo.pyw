@@ -7,6 +7,7 @@ from tkinter import filedialog
 import subprocess
 import threading
 import chardet
+import logging
 import sys
 import os
 
@@ -15,6 +16,9 @@ from widgets.barrasuperior import BarraSuperior
 from widgets.conteudo import Conteudo
 from widgets.barrainferior import BarraInferior
 from widgets.janelasalvar import JanelaSalvar
+
+
+logging.basicConfig(filename='debug.log', level=logging.DEBUG)
 
 
 class Aplicativo(Tk):
@@ -137,10 +141,8 @@ class Aplicativo(Tk):
 
     # Outras funções
     def abrirApp(self):
-        if os.name == 'nt':
-            subprocess.call(['pythonw', 'aplicativo.pyw'])
-        else:
-            os.system('./aplicativo.pyw')
+        from aplicativo import executar
+        executar()
 
     def receberArquivo(self):
         if len(sys.argv) < 2:
@@ -162,5 +164,9 @@ class Aplicativo(Tk):
         self.conteudo.conteudo.replace(0.0, END, self.mensagem)
 
 
-if __name__ == '__main__':
+def executar():
     Aplicativo().mainloop()
+
+
+if __name__ == '__main__':
+    executar()
