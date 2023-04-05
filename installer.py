@@ -6,5 +6,5 @@ PyInstaller.__main__.run([
     '--windowed',
     '--icon=arquivos/icone.ico',
     '--name=aplicativo',
-    '--add-data=arquivos/icone.ico;.',
+    '--add-data=arquivos/icone.ico;./arquivos',
 ])
