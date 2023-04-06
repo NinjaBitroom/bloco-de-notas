@@ -16,7 +16,9 @@ from widgets.barrainferior import BarraInferior
 from widgets.janelasalvar import JanelaSalvar
 
 
-logging.basicConfig(filename='debug.log', level=logging.DEBUG)
+logging.basicConfig(filename='debug.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.debug('Debug message')
+print('Print message')
 
 
 class Aplicativo(Tk):
