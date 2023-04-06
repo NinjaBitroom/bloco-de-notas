@@ -4,12 +4,10 @@
 from tkinter import *
 from tkinter import filedialog
 
-import subprocess
 import threading
 import chardet
 import logging
 import sys
-import os
 
 from aspecto import Aspecto
 from widgets.barrasuperior import BarraSuperior
